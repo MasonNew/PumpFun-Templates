@@ -20,8 +20,11 @@ interface Template1PreviewProps {
   showRoadmap?: boolean;
   showSocialProof?: boolean;
   showSocialLinks?: boolean;
+  marketCapLabel?: string;
   marketCap?: string;
+  holdersLabel?: string;
   holders?: string;
+  transactionsLabel?: string;
   transactions?: string;
   twitterLink?: string;
   telegramLink?: string;
@@ -42,8 +45,11 @@ export function Template1Preview({
   showRoadmap = true,
   showSocialProof = true,
   showSocialLinks = true,
+  marketCapLabel = "Market Cap",
   marketCap = "$10M",
+  holdersLabel = "Holders",
   holders = "25K+",
+  transactionsLabel = "Transactions",
   transactions = "100K",
   twitterLink = "https://twitter.com/pepe2",
   telegramLink = "https://t.me/pepe2",
@@ -110,14 +116,7 @@ export function Template1Preview({
                 <span className="text-xl font-press-start text-white">{title}</span>
               </div>
               <div className="hidden md:flex items-center space-x-4">
-                {["About", "Tokenomics", "Roadmap"].map((item) => (
-                  <button
-                    key={item}
-                    className="text-white hover:text-[#4ECDC4] font-press-start text-xs transition-colors"
-                  >
-                    {item}
-                  </button>
-                ))}
+                {/* Removed the "About", "Tokenomics", "Roadmap" buttons */}
                 {!hidePhantom && (
                   <button
                     className="bg-[#4ECDC4] hover:bg-[#45B7AF] text-black font-press-start text-xs px-4 py-2 rounded-md transition-colors"
@@ -163,8 +162,11 @@ export function Template1Preview({
           />
           {showSocialProof && (
             <SocialProof
+              marketCapLabel={marketCapLabel}
               marketCap={marketCap}
+              holdersLabel={holdersLabel}
               holders={holders}
+              transactionsLabel={transactionsLabel}
               transactions={transactions}
               accentColor={accentColor}
             />

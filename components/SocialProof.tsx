@@ -6,6 +6,9 @@ interface SocialProofProps {
   marketCap?: string;
   holders?: string;
   transactions?: string;
+  marketCapLabel?: string;
+  holdersLabel?: string;
+  transactionsLabel?: string;
   accentColor?: string;
 }
 
@@ -13,12 +16,15 @@ export function SocialProof({
   marketCap = "$10M",
   holders = "25K+",
   transactions = "100K",
+  marketCapLabel = "Market Cap",
+  holdersLabel = "Holders",
+  transactionsLabel = "Transactions",
   accentColor = "#4ECDC4"
 }: SocialProofProps) {
   const stats = [
-    { icon: Rocket, value: marketCap, label: "MARKET CAP" },
-    { icon: Users, value: holders, label: "HOLDERS" },
-    { icon: Zap, value: transactions, label: "TRANSACTIONS" },
+    { icon: Rocket, value: marketCap, label: marketCapLabel },
+    { icon: Users, value: holders, label: holdersLabel },
+    { icon: Zap, value: transactions, label: transactionsLabel },
   ];
 
   return (
