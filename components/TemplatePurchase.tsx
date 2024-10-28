@@ -52,6 +52,7 @@ export function TemplatePurchase() {
         if (solana) {
           const response = await solana.connect({ onlyIfTrusted: false });
           const publicKey = response.publicKey.toString();
+          console.log("Connected wallet address:", publicKey);
           setWalletAddress(publicKey);
         }
       } catch (error) {
@@ -67,6 +68,7 @@ export function TemplatePurchase() {
       const solana = window.solana;
       if (solana && solana.isConnected && solana.publicKey) {
         const publicKey = solana.publicKey.toString();
+        console.log("Wallet connected on page load:", publicKey);
         setWalletAddress(publicKey);
       }
     }
@@ -102,14 +104,35 @@ export function TemplatePurchase() {
       transaction.recentBlockhash = blockhash;
 
       // Request the Phantom wallet to sign and send the transaction
-      const { signature } = await solana.signAndSendTransaction(transaction);
+      const signedTransaction = await solana.signTransaction(transaction);
+      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
       await connection.confirmTransaction(signature, 'processed');
 
       alert("Payment successful! Thank you for your purchase.");
-      // Redirect user or show confirmation page here
+      console.log("Transaction successful. Proceeding with Netlify deployment...");
+
+      // Call the Netlify deploy function to deploy the customized template
+      const response = await fetch('/.netlify/functions/deploy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NETLIFY_AUTH_TOKEN}` // Using the token to authenticate
+        },
+        body: JSON.stringify({ formData })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to deploy site. Status: ${response.status}, Response: ${errorText}`);
+      }
+
+      const { claimURL, siteUrl } = await response.json();
+      alert(`Your site is live at: ${siteUrl}. Claim it here: ${claimURL}`);
+      console.log(`Deployment successful. Site URL: ${siteUrl}, Claim URL: ${claimURL}`);
+
     } catch (error) {
-      console.error('Payment failed:', error);
-      alert("Payment failed. Please try again.");
+      console.error('An error occurred:', error);
+      alert(`Payment or deployment failed. Please try again. Error details: ${error.message}`);
     }
   };
 
@@ -382,6 +405,7 @@ export function TemplatePurchase() {
                     <Button 
                       className="w-full bg-[#4ECDC4] hover:bg-[#45b8b0] text-black font-press-start mt-6"
                       onClick={handlePurchase}
+                      disabled={!walletAddress}
                     >
                       Purchase (0.15 SOL)
                     </Button>
