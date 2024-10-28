@@ -101,9 +101,8 @@ export function TemplatePurchase() {
       const { blockhash } = await connection.getLatestBlockhash();
       transaction.recentBlockhash = blockhash;
 
-      // Request the Phantom wallet to sign the transaction
-      const signedTransaction = await solana.signTransaction(transaction);
-      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+      // Request the Phantom wallet to sign and send the transaction
+      const { signature } = await solana.signAndSendTransaction(transaction);
       await connection.confirmTransaction(signature, 'processed');
 
       alert("Payment successful! Thank you for your purchase.");
@@ -134,7 +133,7 @@ export function TemplatePurchase() {
           <div className="text-center">
             <h1 className="text-4xl font-press-start text-white mb-4">Crypto Launch Template</h1>
             <p className="text-lg text-white/80 mb-8">Professional template for launching your next crypto project</p>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
               {[
                 "Premium Design",
