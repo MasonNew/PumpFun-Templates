@@ -12,19 +12,6 @@ import { Switch } from './ui/switch';
 import { Connection, PublicKey, LAMPORTS_PER_SOL, Transaction, SystemProgram } from '@solana/web3.js';
 import { Label } from './ui/label';
 
-interface SolanaProvider {
-  isPhantom?: boolean;
-  signTransaction?: (transaction: Transaction) => Promise<Transaction>;
-  connect: (options: { onlyIfTrusted: boolean }) => Promise<{ publicKey: PublicKey }>;
-  publicKey?: PublicKey;
-}
-
-declare global {
-  interface Window {
-    solana?: SolanaProvider;
-  }
-}
-
 export function TemplatePurchase() {
   const [formData, setFormData] = useState({
     contractAddress: 'Solana111111111111111111111111111111112',
@@ -117,9 +104,8 @@ export function TemplatePurchase() {
       transaction.recentBlockhash = blockhash;
 
       // Request the Phantom wallet to sign and send the transaction
-      const signedTransaction = await solana.signTransaction!(transaction);
-      const signature = await connection.sendRawTransaction(signedTransaction.serialize());
-      await connection.confirmTransaction(signature, 'processed');
+      const signedTransaction = await solana.signAndSendTransaction(transaction);
+      await connection.confirmTransaction(signedTransaction.signature, 'processed');
 
       alert("Payment successful! Thank you for your purchase.");
       console.log("Transaction successful. Proceeding with Netlify deployment...");
