@@ -129,9 +129,9 @@ export function TemplatePurchase() {
       alert(`Your site is live at: ${siteUrl}. Claim it here: ${claimURL}`);
       console.log(`Deployment successful. Site URL: ${siteUrl}, Claim URL: ${claimURL}`);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('An error occurred:', error);
-      alert(`Payment or deployment failed. Please try again. Error details: ${error.message}`);
+      alert(`Payment or deployment failed. Please try again. Error details: ${error.message || error}`);
     }
   };
 
