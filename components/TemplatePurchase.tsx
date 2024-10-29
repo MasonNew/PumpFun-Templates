@@ -12,6 +12,19 @@ import { Switch } from './ui/switch';
 import { Connection, PublicKey, LAMPORTS_PER_SOL, Transaction, SystemProgram } from '@solana/web3.js';
 import { Label } from './ui/label';
 
+interface SolanaProvider {
+  isPhantom?: boolean;
+  signTransaction?: (transaction: Transaction) => Promise<Transaction>;
+  connect: (options: { onlyIfTrusted: boolean }) => Promise<{ publicKey: PublicKey }>;
+  publicKey?: PublicKey;
+}
+
+declare global {
+  interface Window {
+    solana?: SolanaProvider;
+  }
+}
+
 export function TemplatePurchase() {
   const [formData, setFormData] = useState({
     contractAddress: 'Solana111111111111111111111111111111112',
@@ -48,7 +61,7 @@ export function TemplatePurchase() {
   const connectWallet = async () => {
     if (checkPhantom()) {
       try {
-        const solana = window.solana;
+        const solana = window.solana as SolanaProvider;
         if (solana) {
           const response = await solana.connect({ onlyIfTrusted: false });
           const publicKey = response.publicKey.toString();
@@ -65,7 +78,7 @@ export function TemplatePurchase() {
 
   useEffect(() => {
     if (checkPhantom()) {
-      const solana = window.solana;
+      const solana = window.solana as SolanaProvider;
       if (solana && solana.isConnected && solana.publicKey) {
         const publicKey = solana.publicKey.toString();
         console.log("Wallet connected on page load:", publicKey);
@@ -80,7 +93,7 @@ export function TemplatePurchase() {
       return;
     }
 
-    const solana = window?.solana;
+    const solana = window?.solana as SolanaProvider;
 
     if (!solana || !solana.isPhantom) {
       alert('Phantom wallet is not available. Please ensure it is installed and connected.');
@@ -104,7 +117,7 @@ export function TemplatePurchase() {
       transaction.recentBlockhash = blockhash;
 
       // Request the Phantom wallet to sign and send the transaction
-      const signedTransaction = await solana.signTransaction(transaction);
+      const signedTransaction = await solana.signTransaction!(transaction);
       const signature = await connection.sendRawTransaction(signedTransaction.serialize());
       await connection.confirmTransaction(signature, 'processed');
 
