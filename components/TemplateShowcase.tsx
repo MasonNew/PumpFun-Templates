@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Template1Preview } from "./Template1Preview";
 import Link from "next/link";
+import Image from "next/image";
 
 export function TemplateShowcase() {
   const templates = [
@@ -10,21 +10,21 @@ export function TemplateShowcase() {
       id: 1,
       name: "Crypto Launch Template",
       description: "A modern, animated template perfect for token launches",
-      price: "0.25 SOL",
+      price: "0.15 SOL",
       features: ["Animated Sections", "Mobile Responsive", "Social Integration", "Custom Branding"]
     },
     {
       id: 2,
-      name: "Crypto Launch Template",
-      description: "A modern, animated template perfect for token launches",
-      price: "0.25 SOL",
+      name: "Coming Soon",
+      description: "Stay tuned!",
+      price: "0.15 SOL",
       features: ["Animated Sections", "Mobile Responsive", "Social Integration", "Custom Branding"]
     },
     {
       id: 3,
-      name: "Crypto Launch Template",
-      description: "A modern, animated template perfect for token launches",
-      price: "0.25 SOL",
+      name: "Coming Soon",
+      description: "Stay tuned!",
+      price: "0.15 SOL",
       features: ["Animated Sections", "Mobile Responsive", "Social Integration", "Custom Branding"]
     }
   ];
@@ -44,11 +44,19 @@ export function TemplateShowcase() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="space-y-4">
                   <div className="relative aspect-video rounded-lg overflow-hidden border-2 border-[#4ECDC4]">
-                    <Template1Preview
-                      contractAddress="So1ana1111111111111111111111111111111111112"
-                      title="$CTWT"
-                      logo={null}
-                    />
+                    {template.id === 1 ? (
+                      <Image
+                        src="/images/template1preview.png"
+                        alt="Template Preview"
+                        className="object-cover"
+                        fill
+                        priority
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">
+                        <span className="text-xl font-press-start text-white">Coming Soon</span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div>
