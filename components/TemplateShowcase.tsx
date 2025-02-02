@@ -48,21 +48,13 @@ export function TemplateShowcase() {
                 <div className="space-y-4">
                   <div className="relative aspect-video rounded-lg overflow-hidden border-2 border-[#4ECDC4]">
                     {template.id === 1 ? (
-                      imageError ? (
-                        <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">
-                          <span className="text-xl font-press-start text-white">Preview Loading...</span>
-                        </div>
-                      ) : (
-                        <Image
-                          src="/images/template1-preview.png"
-                          alt="Template Preview"
-                          width={1920}
-                          height={1080}
-                          className="object-cover"
-                          priority
-                          onError={() => setImageError(true)}
-                        />
-                      )
+                      <Image
+                        src="/template1preview.png"
+                        alt="Template Preview"
+                        className="object-cover"
+                        fill
+                        priority
+                      />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">
                         <span className="text-xl font-press-start text-white">Coming Soon</span>
