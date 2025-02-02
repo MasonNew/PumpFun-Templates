@@ -37,9 +37,13 @@ export function TemplatePurchase() {
     heroSubtitle: 'Professional, animated templates for your crypto project. Ready to deploy in minutes.'
   });
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
-
-  const connection = new Connection('https://smart-radial-arrow.solana-mainnet.quiknode.pro/966e60fc177041cdb0de3468fdbe19ee80aeab9d');
+  const [isDeploying, setIsDeploying] = useState(false);
   const priceInSOL = 0.15;
+
+  const connection = new Connection(
+    'https://rpc.shyft.to?api_key=gk2CFJvy6BgDL7i_',
+    'confirmed'
+  );
 
   const checkPhantom = () => {
     return typeof window !== 'undefined' && window.solana?.isPhantom;

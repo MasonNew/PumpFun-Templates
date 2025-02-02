@@ -16,8 +16,8 @@ export function Navigation({ customTitle, customLogo, hidePhantom = false }: Nav
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [balance, setBalance] = useState<number | null>(null);
 
-  // Use the QuickNode endpoint
-  const connection = new Connection('https://smart-radial-arrow.solana-mainnet.quiknode.pro/966e60fc177041cdb0de3468fdbe19ee80aeab9d');
+  // Use the Shyft RPC endpoint
+  const connection = new Connection('https://rpc.shyft.to?api_key=gk2CFJvy6BgDL7i_', 'confirmed');
 
   const menuItems = [
     { name: "Features", path: "/#features" },
