@@ -75,11 +75,20 @@ export function TemplateShowcase() {
                   </ul>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-press-start text-[#4ECDC4]">{template.price}</span>
-                    <Link href={`/templates/${template.id}`}>
-                      <Button className="bg-[#4ECDC4] hover:bg-[#45B7AF] text-black font-press-start">
+                    {template.id === 1 ? (
+                      <Link href={`/templates/${template.id}`}>
+                        <Button className="bg-[#4ECDC4] hover:bg-[#45B7AF] text-black font-press-start">
+                          Customise Template
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button 
+                        className="bg-gray-600 text-gray-300 font-press-start cursor-not-allowed"
+                        disabled
+                      >
                         Purchase Template
                       </Button>
-                    </Link>
+                    )}
                   </div>
                 </div>
               </div>
