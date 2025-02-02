@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 export function Pricing() {
   const features = [
@@ -25,7 +26,7 @@ export function Pricing() {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-press-start text-white mb-4">Template Package</h3>
             <div className="flex items-center justify-center mb-4">
-              <span className="text-4xl font-press-start text-[#4ECDC4]">0.25 Solana</span>
+              <span className="text-4xl font-press-start text-[#4ECDC4]">0.15 Solana</span>
             </div>
           </div>
           <ul className="space-y-4 mb-8">
@@ -36,12 +37,11 @@ export function Pricing() {
               </li>
             ))}
           </ul>
-          <Button
-            className="w-full bg-[#4ECDC4] hover:bg-[#45B7AF] text-black font-press-start"
-            onClick={() => window.open("https://gumroad.com/l/template1", "_blank")}
-          >
-            Purchase Now
-          </Button>
+          <Link href="/templates/1">
+            <Button className="w-full bg-[#4ECDC4] hover:bg-[#45B7AF] text-black font-press-start">
+              Purchase Now
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </div>

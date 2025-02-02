@@ -46,7 +46,7 @@ export function TemplateShowcase() {
                   <div className="relative aspect-video rounded-lg overflow-hidden border-2 border-[#4ECDC4]">
                     {template.id === 1 ? (
                       <Image
-                        src="/images/template1preview.png"
+                        src="/template1-preview.png"
                         alt="Template Preview"
                         className="object-cover"
                         fill
