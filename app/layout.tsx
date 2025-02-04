@@ -21,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <body className={`${pressStart.variable} font-sans`}>
         {children}
         <Toaster position="top-center" />

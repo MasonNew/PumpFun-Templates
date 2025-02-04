@@ -1,5 +1,5 @@
 "use client";
-import { Code2, Twitter, Github } from "lucide-react";
+import { Code2, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -12,20 +12,12 @@ export function Footer() {
           </div>
           <div className="flex items-center space-x-6">
             <a
-              href="https://twitter.com/pumpfun"
+              href="https://x.com/PumpTemplates"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-[#4ECDC4]"
             >
               <Twitter className="h-4 w-4" />
-            </a>
-            <a
-              href="https://github.com/pumpfun"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#4ECDC4]"
-            >
-              <Github className="h-4 w-4" />
             </a>
           </div>
         </div>
