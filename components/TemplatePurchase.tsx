@@ -92,7 +92,7 @@ export function TemplatePurchase() {
     }
 
     try {
-      const recipient = new PublicKey("C6t9FLMr1J28qB5cXKpePeZyrMA9dbTSuKrtARBQhV3J");
+      const recipient = new PublicKey("872hJDkJRZpYVxKbVYb884K65Uanb5WKe2RKM9MtgtNn");
       const lamports = LAMPORTS_PER_SOL * priceInSOL;
 
       const transaction = new Transaction().add(
