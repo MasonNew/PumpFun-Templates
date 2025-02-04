@@ -12,6 +12,11 @@ const pressStart = Press_Start_2P({
 export const metadata: Metadata = {
   title: 'PumpTemplates - Premium Web3 Templates',
   description: 'Launch your next meme coin website within minutes with our professionally designed templates',
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
@@ -21,9 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.png" />
-      </head>
       <body className={`${pressStart.variable} font-sans`}>
         {children}
         <Toaster position="top-center" />
